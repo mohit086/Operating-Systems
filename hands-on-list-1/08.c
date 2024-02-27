@@ -8,12 +8,15 @@ and display each line as it is read. Close the file upon reaching the end of the
 */
 
 int main(){
-	int fd,rsize;
-	char buf[1000];
-	fd = open("file08", O_CREAT | O_RDONLY);
-	while (rsize = read(fd,buf,sizeof(buf)) > 0) printf("%s",buf);
-	close(fd);
-	return 0;
+    int fd = open("file08", O_CREAT | O_RDONLY);
+    char temp;
+    while(read(fd,&temp,1)){
+        write(1,&temp,1);
+        if(temp=='\n')
+        getchar();
+    }
+    close(fd);
+    return 0;
 }
 
 /*./a.out*/
