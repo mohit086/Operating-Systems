@@ -23,7 +23,7 @@ int main(){
 	int k = mkfifo(d,0666);
 
 	i==0 ? printf("Softlink created successfully\n") : printf("Error in creating softlink\n");
-    j==0 ? printf("Hardlink created successfully\n") : printf("Error creating hardlink\n");
+	j==0 ? printf("Hardlink created successfully\n") : printf("Error creating hardlink\n");
 	k==0 ? printf("FIFO file created successfully\n") : printf("Error in creating FIFO file\n");
 
 	return 0;
