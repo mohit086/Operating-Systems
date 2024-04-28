@@ -7,6 +7,8 @@
 //run this first, then b
 int main(){
     char buf[100];
+    mkfifo("myfifo1",0666);
+    mkfifo("myfifo2",0666);
     int fd1 = open("myfifo1", O_WRONLY, 0666);
     write(fd1, "Hello from first program\n", sizeof("Hello from first program\n"));
     close(fd1);

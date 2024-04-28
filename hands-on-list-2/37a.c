@@ -6,6 +6,7 @@
 // run this first, then b
 int main(){
     char buf[80];
+    mkfifo("myfifo",0666);
     int fd = open("myfifo",O_WRONLY, 0666);
     printf("Enter data to write: ");
     scanf("%[^\n]",buf);
