@@ -14,6 +14,6 @@ int main(){
     it.it_value.tv_usec = 10;
     it.it_interval.tv_sec = 10;
     it.it_interval.tv_usec = 10;
-    setitimer(ITIMER_VIRTUAL, &it, NULL);
+    setitimer(ITIMER_VIRTUAL, &it, NULL); // decrements only when process is RUNNING
     while (1) ;
 }

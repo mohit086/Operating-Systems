@@ -3,7 +3,7 @@
 #include <signal.h>
 
 int main(){
-    signal(SIGINT,SIG_IGN);
+    signal(SIGINT,SIG_IGN); // ignoring the sigint signal
     printf("SIGINT has been ignored\n");
     sleep(10);
     signal(SIGINT,SIG_DFL);

@@ -12,6 +12,7 @@ int main(){
         dup2(fd[1], 1);
         execl("/bin/ls", "/bin/ls", "-l", NULL);
     }
+    
     else{
         close(0);
         close(fd[1]);

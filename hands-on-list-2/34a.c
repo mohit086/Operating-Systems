@@ -18,6 +18,5 @@ int main(){
         dup(fd[0]);
         execl("/bin/wc", "/bin/wc", NULL);
     }
-
 	return (0);
 }

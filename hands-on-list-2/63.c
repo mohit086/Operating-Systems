@@ -6,7 +6,7 @@ int main(){
     if (!fork()){
         printf("Child process has pid %d\n", getpid());
         sleep(4);
-        kill(getppid(), 9);
+        kill(getppid(), SIGKILL);
         printf("Parent killed, Child is now orphan\n");
         while(1);
     }

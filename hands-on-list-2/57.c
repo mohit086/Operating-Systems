@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-int main(){
+int main(){ //sysconf syscall
     printf("Maximum length of the arguments to the exec family of functions: %ld\n", sysconf(_SC_ARG_MAX));
     printf("Maximum number of simultaneous process per user id: %ld\n", sysconf(_SC_CHILD_MAX));
     printf("Maximum number of clock ticks (jiffy) per second: %ld\n", sysconf(_SC_CLK_TCK));

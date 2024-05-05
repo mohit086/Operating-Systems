@@ -39,7 +39,7 @@ int main(){
 
     printf("Before critical section : counter 1 = %d, counter 2 = %d\n", *shm_ptr, *shm_ptr2);
 
-    // LOCKING TWICE - COUNTING SEMAPHORE ACCESS TO 2 Resouces
+    // Locking once
     sops.sem_num = 0;
     sops.sem_op = -1;
 
@@ -48,21 +48,21 @@ int main(){
         return -1;
     }
 
-    int temp = *shm_ptr;
+    int temp = *shm_ptr; // critical section for shared memory 2
     temp++;
     *shm_ptr = temp;
 
     printf("During critical section after 1 operation: counter 1 = %d, counter 2 = %d\n", *shm_ptr, *shm_ptr2);
 
+    // Locking once more for the 2nd resource
     sops.sem_num = 0;
     sops.sem_op = -1;
-    if (semop(sem_id, &sops, 1) == -1)
-    {
+    if (semop(sem_id, &sops, 1) == -1){
         printf("Error in semop system call\n");
         return -1;
     }
 
-    temp = *shm_ptr2;
+    temp = *shm_ptr2; // critical section for shared memory 2
     temp++;
     *shm_ptr2 = temp;
 
@@ -74,15 +74,13 @@ int main(){
 
     // UNLOCK TWICE
     sops.sem_op = 1;
-    if (semop(sem_id, &sops, 1) == -1)
-    {
+    if (semop(sem_id, &sops, 1) == -1){
         printf("Error in semop system call\n");
         return -1;
     }
 
     sops.sem_op = 1;
-    if (semop(sem_id, &sops, 1) == -1)
-    {
+    if (semop(sem_id, &sops, 1) == -1){
         printf("Error in semop system call\n");
         return -1;
     }

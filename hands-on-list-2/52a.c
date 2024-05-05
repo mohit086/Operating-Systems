@@ -8,7 +8,7 @@
 int main(){
     struct sockaddr_in server,client;
     char buf[1000];
-    int sd = socket(AF_INET,SOCK_STREAM,0);
+    int sd = socket(AF_INET,SOCK_STREAM,0); // TCP internet socket
     server.sin_addr.s_addr = inet_addr("127.0.0.1");
     server.sin_family = AF_INET;
     server.sin_port = htons(5000);

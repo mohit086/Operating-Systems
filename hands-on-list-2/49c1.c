@@ -21,7 +21,7 @@ int main(){
         printf("Error in shmget call\n");
         return -1;
     }
-    int *shm_ptr = shmat(shm_id, NULL, 0);
+    int *shm_ptr = shmat(shm_id, NULL, 0); // NULL means os decides where to put shared memory
     int *shm_ptr2 = shmat(shm_id2, NULL, 0);
     if (shm_ptr == (void *)-1 || shm_ptr2 == (void *)-1){
         printf("Error in shmat call\n");
@@ -35,7 +35,7 @@ int main(){
         return -1;
     }
     union sem sem_args;
-    sem_args.val = 2;
+    sem_args.val = 2; // counting semaphore with value 2 since there are 2 resources
     if (semctl(sem_id, 0, SETVAL, sem_args) == -1){
         printf("Error in semctl system call\n");
         return -1;

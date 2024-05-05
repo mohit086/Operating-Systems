@@ -2,7 +2,7 @@
 #include <sys/resource.h>
 #include <errno.h>
 
-int main(){
+int main(){ // used getrlimit and setrlimit
     struct rlimit rlim;
     printf("Old limits\n");
     getrlimit(RLIMIT_CPU, &rlim);

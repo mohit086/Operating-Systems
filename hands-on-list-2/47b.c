@@ -7,7 +7,7 @@ int main(){
     int shmid = shmget(key, 1024, 0);
     char *data = shmat(shmid, (void *)0, SHM_RDONLY); // <- This will give segmentation fault
     printf("Enter data to put in shared memory: ");
-    scanf("%[^\n]s", data);
+    scanf("%[^\n]s", data); // we are writing to shared memory_which is readonly
     printf("Data written to shared memory\n");
     return(0);
 }

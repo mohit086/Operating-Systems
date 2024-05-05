@@ -11,7 +11,7 @@ int main(){
     int shm_key = ftok(".", 'S');
     int sem_key = ftok(".", 'T');
 
-    int shm_id = shmget(shm_key, 1024, 0);
+    int shm_id = shmget(shm_key, 1024, 0); // get the shared memory
 
     int *shm_ptr = shmat(shm_id, NULL, 0);
     if (shm_ptr == (void *)-1){
@@ -19,19 +19,19 @@ int main(){
         return -1;
     }
 
-    int sem_id = semget(sem_key, 1, 0);
+    int sem_id = semget(sem_key, 1, 0); // get the semaphore
     if (sem_id == -1){
         printf("Error in semget system call\n");
         return -1;
     }
 
     sops.sem_num = 0;
-    sops.sem_op = -1;
+    sops.sem_op = -1; // operation -1 is for locking
     sops.sem_flg = 0;
 
     printf("Before : counter = %d\n", *shm_ptr);
 
-    if (semop(sem_id, &sops, 1) == -1){
+    if (semop(sem_id, &sops, 1) == -1){ // lock starts from here
         printf("Error in semop system call\n");
         return -1;
     }
@@ -46,8 +46,8 @@ int main(){
     char ch;
     scanf("%c", &ch);
 
-    sops.sem_op = 1;
-    if (semop(sem_id, &sops, 1) == -1)
+    sops.sem_op = 1; // lock ends here
+    if (semop(sem_id, &sops, 1) == -1) // unlock
     {
         printf("Error in semop system call\n");
         return -1;

@@ -10,12 +10,22 @@ unsigned long long rdtsc(){
 }
 
 int main(){
-    long long start, end;
+    unsigned long long start, end;
+    struct timeval t1, t2;
+    
     start = rdtsc();
     for (int i = 0; i < 100; i++) getppid();
     end = rdtsc();
-    long long int duration = end - start;
-    printf("Time taken for 100 getppid system calls: %llu clock cycles\n", duration);
-    printf("Time taken for 100 getppid system calls: %f seconds\n", duration / (1741.650 * 1e6));
+
+    long long int duration_cycles = end - start;
+    printf("Time taken for 100 getppid system calls: %llu clock cycles\n", duration_cycles);
+
+    gettimeofday(&t1, NULL);
+    for (int i = 0; i < 100; i++) getppid();
+    gettimeofday(&t2, NULL);
+
+    long long int duration_usec = (t2.tv_sec - t1.tv_sec) * 1000000 + (t2.tv_usec - t1.tv_usec);
+    printf("Time taken for 100 getppid system calls: %lld microseconds\n", duration_usec);
+
     return 0;
 }

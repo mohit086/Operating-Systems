@@ -2,7 +2,7 @@
 #include <sys/resource.h>
 
 int main(){
-	struct rlimit s;
+	struct rlimit s; // structure for resource limits
 	if(getrlimit(RLIMIT_AS, &s) != -1){
 		printf("Size of virtual memory\n");
 		printf("Soft - %lu\n", s.rlim_cur);
